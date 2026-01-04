@@ -1,0 +1,15 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# C++ build files
+*.exe
+*.out
+*.o
+
+# Notes / scratch
+test/

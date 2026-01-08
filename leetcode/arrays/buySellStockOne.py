@@ -35,8 +35,16 @@ def maxProfitAnswer(prices):
 
     return max_profit
 
-p1 = [2,1,4]
-p2 = [7,1,5,3,6,4]
 
-print(maxProfit(p1))
-print(maxProfit(p2))
+def maxProfitResolve(prices):
+    minP = float('inf')
+    maxP = -1
+
+    for price in prices:
+        minP = min(price, minP)
+        maxP = max(maxP, price-minP)
+    
+    return maxP
+
+
+

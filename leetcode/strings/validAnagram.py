@@ -50,3 +50,18 @@ def isAnagramOptimized(s, t):
 # def isAnaGramSuperOptimized(s, t):
 #     return Counter(s) == Counter(t)
 #Counter is a dictionary optimized for counting things, its in C so it is often faster.
+
+def isAnagramResolve(s, t):
+    if len(s) != len(t):
+        return False
+    
+    d = {}
+    for char in s:
+        d[char] = d.get(char, 0) + 1
+    
+    for char in t:
+        if char not in d:
+            return False
+        d[char] -=1
+    
+    return all(v == 0 for v in d.values)

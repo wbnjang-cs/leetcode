@@ -9,7 +9,5 @@ def reverseString(s):
 def reverseStringAnswer(s):
     s[:] = s[::-1]
 
-
-s = ["h","e","l","p","o"]
-reverseString(s)
-print(s)
+def reverseStringResolve(s):
+    s[:] = s[::-1]

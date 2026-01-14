@@ -1,67 +1,92 @@
 #binaryTreeInOrderTraversal.py
+
+
+from collections import deque
+
 class TreeNode(object):
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
 
-from collections import deque
+def inorderTraversal(root):
+    answer = []
 
+    inorderRecursive(root, answer)
 
-def levelOrder(root):
-    if root == None:
-        return []
+    return answer
+
+def inorderRecursive(root, ans):
+    if not root:
+        return
     
-    d = deque()
-    t = deque()
-    a = []
-
-    d.append(root)
+    if root.left:
+        inorderRecursive(root.left, ans)
     
- 
-    while len(d) != 0:
-        level = []
-        for node in d:
-            level.append(node.val)
-            if node.left:
-                t.append(node.left)
-            if node.right:
-                t.append(node.right)
-         
-        d = t.copy()
-        t.clear()
-        a.append(level)
+    ans.append(root.val)
 
-    return a
+    if root.right:
+        inorderRecursive(root.right, ans)
 
-def levelOrderAlternate(root):
-    if root == None:
-        return []
-    
+
+def inorderTraversalIterative(root):
+    ans = []
     d = deque()
     d.append(root)
-    a = []
 
-    while len(d) != 0:
-        level = []
-        for i in range(len(d)):
-            node = d.popleft()
-            level.append(node.val)
-            if node.left:
-                d.append(node.left)
-            if node.right:
-                d.append(node.right)
+    while d:
+        n = d.popleft()
+        if not n:
+            continue
+        if not n.left:
+            ans.append(n.val)
+            d.appendleft(n.right)
+            continue
+
+
+        l = n.left
+        n.left = None
+        d.appendleft(n)
+        d.appendleft(l)
+    return ans
         
-        a.append(level)
-    
-    return a
 
 
 
 
-    
+#---------------------------------------------------------------
 
-r = TreeNode(3, TreeNode(9), TreeNode(20, TreeNode(15), TreeNode(7)))
 
-print(levelOrderAlternate(r))
+#slightly faster/cleaner, same bit ) memory and runtime, so don't sweat it.
+def inorderTraversalOptimized(root):
+    ans = []
+
+    def inorderRec(root):
+        if not root:
+            return
+        inorderRec(root.left)
+        ans.append(root.val)
+        inorderRec(root.right)
+
+    inorderRec(root)
+
+    return ans
+
+
+n9 = TreeNode(9)
+
+n6 = TreeNode(6)
+n7 = TreeNode(7)
+
+n4 = TreeNode(4)
+n5 = TreeNode(5, left=n6, right=n7)
+
+n8 = TreeNode(8, left = n9)
+
+n2 = TreeNode(2, left=n4, right=n5)
+n3 = TreeNode(3, right=n8)
+
+root = TreeNode(1, left=n2, right=n3)
+
+print(inorderTraversalIterative(root))
 

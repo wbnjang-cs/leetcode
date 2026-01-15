@@ -49,6 +49,24 @@ def inorderTraversalIterative(root):
         d.appendleft(n)
         d.appendleft(l)
     return ans
+
+
+def inorderTraversalIterative(root):
+    ans = []
+    stack = []
+    curr = root
+
+    while curr or stack:
+        while curr:
+            stack.append(curr)
+            curr = curr.left
+
+        curr = stack.pop()
+        ans.append(curr.val)
+        curr = curr.right
+
+    return ans
+
         
 
 
@@ -72,6 +90,23 @@ def inorderTraversalOptimized(root):
 
     return ans
 
+#------------------------------------------------------------------
+
+def inorderTraversalIterativeResolve(root):
+    node = root
+    ans = []
+    stack = []
+
+    while node or stack:
+        while node:
+            stack.append(node)
+            node = node.left
+        
+        node = stack.pop()
+        ans.append(node.val)
+        node = node.right
+    
+    return ans
 
 n9 = TreeNode(9)
 
@@ -88,5 +123,5 @@ n3 = TreeNode(3, right=n8)
 
 root = TreeNode(1, left=n2, right=n3)
 
-print(inorderTraversalIterative(root))
+print(inorderTraversalIterativeResolve(root))
 

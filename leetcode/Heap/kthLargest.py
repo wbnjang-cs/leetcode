@@ -10,6 +10,18 @@ def findKthLargest(nums,k):
     
     return h[0]
 
+def findKthLargestAnswer(nums,k):
+    h = nums[:k]
+    heapq.heapify(h)
+
+    for num in nums[k:]:
+        if num > h[0]:
+            heapq.heappop(h)
+            heapq.heappush(h, num)
+    
+    return h[0]
+
+
     
     
 

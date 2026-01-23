@@ -21,6 +21,20 @@ def lengthOfLongestSubstring(s):
 
     return longest
 
+def lengthOfLongestSubstringAns(s):
+    seen = {}
+    left = 0
+    longest = 0
+
+    for right, char in enumerate(s):
+        if char in seen:
+            left = max(left, seen[char]+1)
+        
+        seen[char] = right
+        longest = max(longest, right-left+1)
+    
+    return longest
+        
 s2 = "dvdf"
 s = " "
 s3 = "abcabcbb"

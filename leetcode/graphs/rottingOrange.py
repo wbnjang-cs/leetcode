@@ -56,27 +56,28 @@ def orangesRotting(grid):
 def orangesRottingAnswer():
     q = deque()
     minutes = 0
-    hor = len(grid[0])
-    ver = len(grid)
+    cols = len(grid[0])
+    rows = len(grid)
     numFresh = 0
 
-    for i in range(ver):
-        for j in range(hor):
-            if grid[i][j] == 1:
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] == 1:
                 numFresh +=1
-            if grid[i][j] == 2:
-                q.append((i,j))
+            if grid[r][c] == 2:
+                q.append((r,c))
     
     if numFresh == 0:
         return 0
+    
     dirs = [(1,0), (0,1), (-1,0), (0,-1)]
 
-    while 1 and numFresh > 0:
+    while q and numFresh > 0:
         for orange in range(len(q)):
             r,c = q.popleft()
             for dr, dc in dirs:
                 nr, nc = r + dr, c + dc
-                if 0 <= nr < ver and 0 <= nc < hor and grid[nr][nc] == 1:
+                if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == 1:
                     grid[nr][nc] = 2
                     numFresh -=1
                     q.append((nr,nc))
@@ -84,6 +85,42 @@ def orangesRottingAnswer():
         minutes +=1
     
     return minutes if numFresh == 0 else -1
+
+
+def rottingOrangesAnswer(grid):
+    q = deque()
+    minutes = 0
+    seen = set()
+    cols = len(grid[0])
+    rows = len(grid)
+    freshNum = 0
+
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] == 1:
+                freshNum +=1
+            elif grid[r][c] == 2:
+                q.append((r,c)) 
+    
+    if freshNum == 0:
+        return 0
+    
+    dr = [(1,0),(0,1),(-1,0),(0,-1)]
+
+    while q and freshNum > 0:
+        minutes +=1
+        for pair in range(len(q)):
+            r, c = q.popleft()
+            for dirR, dirC in dr:
+                newR, newC = r + dirR, c + dirC
+                if 0 <= newR < rows and 0 <= newC < cols and grid[newR][newC] == 1:
+                    q.append((newR, newC))
+                    freshNum -=1
+                    grid[newR][newC] = 2
+
+    return minutes if freshNum == 0 else -1
+
+
 
     
 grid = [[2,1,1],[0,1,1],[1,0,1]]

@@ -34,11 +34,19 @@ def lengthOfLongestSubstringAns(s):
         longest = max(longest, right-left+1)
     
     return longest
+
+def lengthOfLongestResolve(s):
+    seen = {}
+    left = 0
+    maxLength = 0
+
+    for right, c in enumerate(s):
+        if c in seen:
+            left = max(left, seen[c] + 1)
+        seen[c] = right
+        maxLength = max(maxLength, right-left+1)
+    
+    return maxLength
+
         
-s2 = "dvdf"
-s = " "
-s3 = "abcabcbb"
-s4 = "bbbbb"
-s5 = "pwwkew"
-s6 = "abba"
-print(lengthOfLongestSubstring(s6))
+

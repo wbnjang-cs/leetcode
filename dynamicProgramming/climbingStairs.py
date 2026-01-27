@@ -18,9 +18,8 @@ def climbStairsBetter(n):
     for i in range(2, n+1):
         stepNums[i] = stepNums[i-1] + stepNums[i-2]
         
-    print(stepNums)
     return stepNums[n]
-print(climbStairsBetter(4))
+
 
         
         

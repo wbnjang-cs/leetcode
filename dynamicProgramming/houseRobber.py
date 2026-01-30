@@ -21,10 +21,12 @@ def robBetter(nums):
     if len(nums) == 1:
         return nums[0]
     
-    maxIncome = 0
+    
 
     back2 = nums[0]
     back1 = max(back2, nums[1])
+
+    maxIncome = max(back1, back2)
 
     for house in nums[2:]:
 
@@ -33,12 +35,6 @@ def robBetter(nums):
         back1 = maxIncome
     
     return maxIncome
-
-n = [2,1,1,2]
-
-print(robBetter(n))
-
-
 
 
 

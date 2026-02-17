@@ -27,10 +27,7 @@ def MinCostClimbingStairsCompact(cost):
         current = cost[stair] + min(first, second)
         first = second
         second = current
-    
-    print(f"second is {second}, current is {current}")
         
-    
     return min(first, second)
 
         

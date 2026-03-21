@@ -48,7 +48,6 @@ def isValidSudokuAns(board):
     squareSeen = defaultdict(set)
 
     for rowNum in range(9):
-        print(f"rownum is {rowNum}")
         for colNum in range(9):
             squareNum = (rowNum // 3) * 3 + (colNum // 3)
             numSeen = board[rowNum][colNum]

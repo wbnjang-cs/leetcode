@@ -1,37 +1,63 @@
 from collections import deque
 
 def isValid(s):
-    d = deque()
-    v = ["()", "[]", "{}"]
-    for char in s:
-        if char == '(' or char == '[' or char == '{':
-           d.append(char)
-        elif len(d) == 0:
-            return False
-        elif d[-1] + char in v:
-            d.pop()
-        else:
-            return False
-    
-    return len(d) == 0
+    myStack = deque()
 
-def isValidAnswer(s):
-    stack = []
-    match = {')' : '(', ']' : '[', '}' : '{'}
-
-    for char in s:
-        if char in match:
-            if len(stack) == 0 or stack[-1] != match[char]:
+    for c in s:
+        if c == ")":
+            try:
+                if myStack.pop() == "(":
+                    continue
+                else:
+                    return False
+            except:
                 return False
-            stack.pop()
+            
+        elif c == "]":
+            try:
+                if myStack.pop() == "[":
 
+                    continue
+                else:
+                    return False
+            except:
+                return False
+            
+        elif c == "}":
+            try:
+                if myStack.pop() == "{":
+                    continue
+                else:
+                    return False
+            except:
+                return False
+        
         else:
-            stack.append(char)
+            myStack.append(c)
+
+    if not myStack:
+
+        return True
     
-    return len(stack == 0)
+    return False
 
 
+def isValidAns(s):
+    stack = deque()
+    map = {")" : "(", "}" : "{", "]" : "["}
 
+    for c in s:
+        if c in map:
+            if not stack or stack.pop() != map[c]:
+                return False
+        else:
+            stack.append(c)
+    
+    if stack:
+        return False
+    
+    return True
 
+s = "[()]"
 
-
+print(isValidAns(s))

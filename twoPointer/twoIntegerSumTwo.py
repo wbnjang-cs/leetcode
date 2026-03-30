@@ -28,10 +28,3 @@ def twoSumAns(numbers, target):
             if res == target:
                 return [i+1, j+1]
             i +=1
-
-
-
-        
-        
-
-

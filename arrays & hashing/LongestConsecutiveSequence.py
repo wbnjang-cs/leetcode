@@ -42,10 +42,31 @@ def longestConsecutiveAnswer(nums):
 
 
 
+def longestConsecutiveResolve(nums):
+    
+    nums = set(nums)
+    maxLen = 0  
+
+    for num in nums:
+        if num-1 in nums:
+            continue
+
+        currLen = 1
+        while num+1 in nums:
+            currLen +=1
+            num +=1
+        
+        maxLen = max(maxLen, currLen)
+        
+    return maxLen
+
+        
+
+
     
 
-nums1 = [5, 2,20,4,10,3,4,]
+nums1 = nums = [100,4,200,1,3,2]
 nums2 = [0,3,2,5,4,6,1,1]
 nums3=[100,4,200,1,3,2]
 
-print(longestConsecutiveAnswer(nums2))
+print(longestConsecutiveResolve(nums1))

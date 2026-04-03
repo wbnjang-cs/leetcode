@@ -69,6 +69,36 @@ def isValidSudokuAns(board):
         
     return True
 
+def isValidSudokuRe(board):
+    rowSeen = defaultdict(set)
+    colSeen = defaultdict(set)
+    boxSeen = defaultdict(set)
+
+
+    for r in range(len(board)):
+        for c in range(len(board[0])):
+            boxNum = (r // 3) * 3 + c // 3
+            num = board[r][c]
+            if num == '.':
+                continue
+
+            if num in rowSeen[r]:
+                return False
+            rowSeen[r].add(num)
+
+            if num in colSeen[c]:
+                return False
+            colSeen[c].add(num)
+
+            if num in boxSeen[boxNum]:
+                return False
+            boxSeen[boxNum].add(num)
+    
+    return True
+    
+    print(rowSeen)
+
+
             
 
 
@@ -82,4 +112,4 @@ board = [["5","3",".",".","7",".",".",".","."]
 ,[".",".",".","4","1","9",".",".","5"]
 ,[".",".",".",".","8",".",".","7","9"]]
 
-print(isValidSudokuAns(board))
+print(isValidSudokuRe(board))

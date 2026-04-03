@@ -1,5 +1,6 @@
 import heapq
 from collections import Counter
+from collections import defaultdict
 
 def topKFrequent(nums, k):
     if len(nums) == 0:
@@ -43,15 +44,35 @@ def topKFrequentBest(nums, k):
             res.append(n)
             if len(res) == k:
                 return res
+
+def topKFrequentRe(nums, k):
+    seen = defaultdict(int)
+    bucket = [[] for i in range(len(nums) +1)]
+    res = []
+
+    for num in nums:
+        seen[num] +=1
+
+    for key, value in seen.items():
+        bucket[value].append(key)
     
+    for i in range(len(bucket) -1, 0, -1):
+        for num in bucket[i]:
+            res.append(num)
+            if len(res) == k:
+                return res
+    
+
+
 
     
 
 
 
 nums = [1,2,1,2,1,2,3,1,3,2]
+n2 = [1]
 k=2
 
-print(topKFrequent(nums, k))
+print(topKFrequentRe(n2, 1))
 
     

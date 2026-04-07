@@ -1,52 +1,32 @@
-#longestSubstringWithoutRepeatingCharacter.py
-
 def lengthOfLongestSubstring(s):
-    longest = 0
-    startingPoint = 0
+    if len(s) == 0 or len(s) == 1:
+        return len(s)
 
-    seen = {}
+    l = 0
+    seen = set()
+    max = 0
 
-    for i in range(len(s)):
-        char = s[i]
-        if char in seen:
-            longest = max(longest, i - startingPoint)
-            
-            startingPoint = max(startingPoint, seen[char] + 1)
-            del seen[char]
-
+    for r in range(len(s)):
+        while s[r] in seen:
+            seen.remove(s[l])
+            l +=1
         
-        seen[char] = i
+        seen.add(s[r])
+        if r - l + 1> max:
+            max = r - l + 1
     
-    longest = max(longest, len(s) - startingPoint)
-
-    return longest
-
-def lengthOfLongestSubstringAns(s):
-    seen = {}
-    left = 0
-    longest = 0
-
-    for right, char in enumerate(s):
-        if char in seen:
-            left = max(left, seen[char]+1)
-        
-        seen[char] = right
-        longest = max(longest, right-left+1)
+    return max
     
-    return longest
 
-def lengthOfLongestResolve(s):
-    seen = {}
-    left = 0
-    maxLength = 0
 
-    for right, c in enumerate(s):
-        if c in seen:
-            left = max(left, seen[c] + 1)
-        seen[c] = right
-        maxLength = max(maxLength, right-left+1)
-    
-    return maxLength
+s = "abcabcbb"
+s2 = "xxxx"
+s3 = "pwwkew"
+s4 = "tmmzuxt"
+print(lengthOfLongestSubstring(s))
+
 
         
 
+
+    

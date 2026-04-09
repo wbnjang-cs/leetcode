@@ -14,7 +14,9 @@ def characterReplacement(s, k):
             freqCharVal = charVal
         
         while r - l + 1 - charCount[freqCharVal] > k:
+            #Was Missing this line so code didn't work
             charCount[ord(s[l]) - ord('A')] -=1
+            #------------------------------------------
             l +=1
         
         if r - l + 1 > maxLen:
@@ -25,14 +27,47 @@ def characterReplacement(s, k):
     return maxLen
 
 def characterReplacementAns (s, k):
+    #Will keep track of Char : frequency of Char INSIDE THE WINDOW
     charCount = {}
+    #will return this value
     maxLen = 0
 
     l = 0
     for r in range(len(s)):
         charCount[s[r]] = 1 + charCount.get(s[r], 0)
 
+        #The window is valid while (r - l + 1) - max(charCount.values()) > k
+        # length of window - (num of most frequent character) > number of swaps
+        #Basically can we swap the non-most frequent characters to get all the same character
+
+        #This loop checks if the window is valid.
+        #if not valid, it will move the left pointer until window is valid
+        #while updating charCount accordingly
         while (r - l + 1) - max(charCount.values()) > k:
+            charCount[s[l]] -=1
+            l +=1
+
+        #update maxLen
+        maxLen = max(maxLen, r - l + 1)
+    
+    return maxLen
+
+def characterReplacementAnsBetter(s, k):
+    
+    charCount = {}
+    maxLen = 0
+
+    l = 0
+    maxFreq = 0
+    for r in range(len(s)):
+        charCount[s[r]] = 1 + charCount.get(s[r], 0)
+
+
+        maxFreq = max(maxFreq, charCount[s[r]])
+
+        #The largest possible window will always be when the maxFreq is the highest
+        #lower maxFreq only leads to smaller windows, so we don't even need to check
+        while (r - l + 1) - maxFreq > k:
             charCount[s[l]] -=1
             l +=1
 
@@ -40,24 +75,5 @@ def characterReplacementAns (s, k):
     
     return maxLen
 
-
-
-        
-
-
-        
-    
-    
-        
-    
-    
-
-
-s = "ABBB"
-k = 2
-
-s1 = "AAABABBA"
-k1 = 1
-print(characterReplacement(s1,k1))
 
         

@@ -48,29 +48,7 @@ def minWindowAns(s, t):
             l +=1
     
     #if resLen is still infinity, we never found a valid window
-    return s[res[0]: res[1] + 1] if resLen != float("infinity") else ""
-
-
-            
-
-
-
-            
-    return s[l: r]
-
-        
-    print(l,i)
-    return windowCount == tCount
-            
-        
-
-
-s = "ADOBECODEBANC"
-t = "ABC"
-
-s2 = "OUZODYXAZV"
-t2 = "XYZ"
-
-s3 = "ab"
-t3 = "b"
-print(minWindow(s2,t2))
+    if resLen == float("infinity"):
+        return ""
+    
+    return s[res[0]: res[1] + 1]

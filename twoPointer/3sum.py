@@ -87,15 +87,51 @@ def threeSumAns(nums):
     return result
 
 
+def threeSumRe(nums):
+    nums.sort()
+    result = []
+    i = 0
+    print(nums)
+    while i < len(nums) - 2:
 
+        #Important
+        if i > 0 and nums[i] == nums[i-1]:
+            i +=1
+            continue
+        #Important
+        
+        target = -nums[i]
 
+        #Important
+        if target < nums[i]:
+            break
+        #Important
+    
+        j = i+1
+        k = len(nums) -1
+        while j < k:
+            if nums[j] + nums[k] == target:
+                result.append([nums[i], nums[j], nums[k]])
+                #Important
+                while j < k and nums[j+1] == nums[j]:
+                    j +=1
+                j+=1
+                #Important
+            elif nums[j] + nums[k] > target:
+                k -=1
+            elif nums[j] + nums[k] < target:
+                j +=1
+
+        i +=1
+    
+    return result
             
 
 
 n = [-1,0,1,2,-1,-4] # [-4, -1, -1, 0, 1, 2]
-n1 = [0,0,0]
+n1 = [0,0,0,0]
 n2 = [0,1,1]
-print(threeSumAns(n))
+print(threeSumRe(n1))
 
-n3 = [-1,0,1,0]
-print(threeSum(n3))
+# n3 = [-1,0,1,0]
+# print(threeSumRe(n3))

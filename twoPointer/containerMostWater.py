@@ -27,6 +27,28 @@ def maxArea(heights):
 
     return maxArea
 
+def maxAreaRe(height):
+    i = 0
+    j = len(height)-1
+    maxWater = 0
+
+    while i < j:
+        lHeight = height[i]
+        rHeight = height[j]
+
+        if lHeight > rHeight:
+            currWater = rHeight * (j-i)
+            if currWater > maxWater:
+                maxWater = currWater
+            j -=1
+
+        else:
+            currWater = lHeight * (j-i)
+            if currWater > maxWater:
+                maxWater = currWater
+            i +=1
+    
+    return maxWater
 
 
 h1 = [1,7,2,5,4,7,3,6]

@@ -56,6 +56,34 @@ def trapAns(height):
     
     return rain
 
+def trapRe(height):
+    if not height:
+        return 0
+    
+    i = 0
+    j = len(height) -1
+
+    res = 0
+
+    maxL = height[i]
+    maxR = height[j]
+
+    while i < j:
+        if maxL < maxR:
+            i +=1
+
+            maxL = max(maxL, height[i])
+            currWater = maxL - height[i]
+            res += currWater
+        else:
+            j -=1
+            maxR = max(maxR, height[j])
+            currWater = maxR - height[j]
+            res += currWater
+    
+    return res
+
+
 
 
 
@@ -65,6 +93,6 @@ def trapAns(height):
 
         
 
-h = [0,1,0,2,1,0,1,3,2,1,2,1]
+h = [1,8,6,2,5,4,8,3,7]
 h2 = [4,2,0,3,2,5]
-print(trap(h2))
+print(trapRe(h))

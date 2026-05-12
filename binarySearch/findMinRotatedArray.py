@@ -38,16 +38,44 @@ def findMinAns(nums):
             j = m - 1
 
     return smallest
+
+def findMinRe(nums):
+    i = 0
+    j = len(nums) - 1
+
+    smallest = nums[0]
+
+    while i <= j:
+        m = (i + j) // 2
+        
+        if nums[i] < nums[j]:
+            smallest = min(nums[i], smallest)
+            break
+
+        else:
+            smallest = min(nums[m], smallest)
+
+            #This checks if left is sorted, and 1 value is sorted so it has to be <=
+            if nums[i] <= nums[m]:
+                i = m + 1
+            else:
+                j = m - 1
+
+    
+    return smallest
+        
+
+
     
 
 n1 = [3,4,5,1,2]
-print(findMin(n1))
+print(findMinRe(n1))
 
 n2 = [4,5,6,7,0,1,2]
-print(findMin(n2))
+print(findMinRe(n2))
 
 n3 = [5,1,2,3,4]
-print(findMin(n3))
+print(findMinRe(n3))
 
 n4 = [3,4,5,6,1,2]
-print(findMin(n4))
+print(findMinRe(n4))

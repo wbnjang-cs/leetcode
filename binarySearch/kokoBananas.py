@@ -34,3 +34,30 @@ def minEatingSpeed(piles, h):
             j = mid-1
     
     return minSpeed
+
+def minEatingSpeedRe(piles, h):
+    #slowest eating speed is 1, not 1
+    i = 1
+    #important
+    j = max(piles)
+
+    minSpeed = j
+    
+    while i <= j:
+        m = (i + j) // 2
+        time = 0
+
+        for pile in piles:
+            time += - (-pile // m)
+        
+        if time > h:
+            i = m + 1
+        elif time <= h:
+            j = m - 1
+            minSpeed = min(m, minSpeed)
+
+    return minSpeed
+p1 = [30,11,23,4,20]
+h1 = 5
+
+print(minEatingSpeed(p1, h1))
